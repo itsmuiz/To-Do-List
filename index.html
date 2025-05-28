@@ -4,110 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>to do list</title>
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            padding: 10px;
-            height: 100vh;
-            width: 100vw;
-            background-color: #222222;
-            color: #eeeeee;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-around;
-            align-items: center;
-            overflow: hidden;
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        }
-
-        header {
-            height: 10vh;
-            width: 100vw;
-            letter-spacing: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            flex-direction: column;
-        }
-
-        .input {
-            height: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        input {
-            outline: none;
-            border: none;
-            padding: 10px 20px;
-        }
-
-        input[type="text"] {
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-        }
-
-        input[type="submit"] {
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-            cursor: pointer;
-        }
-
-        input[type="checkbox"]:checked {
-            outline: none;
-            border: none;
-            background-color: transparent;
-            cursor: pointer;
-        }
-
-        ul {
-            list-style-type: none;
-            padding: 10px 0px;
-            margin: 0;
-            height: 80vh;
-            width: 100vw;
-            display: flex;
-            justify-content: start;
-            align-items: start;
-            flex-wrap: wrap;
-        }
-
-        li {
-            padding: 20px 10px;
-            margin: 10px;
-            height: 10px;
-            width: 200px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-radius: 5px;
-            background-color: #3a3a3a;
-        }
-
-        button {
-            padding: 0px 10px;
-            outline: none;
-            border: none;
-            color: #ffffff;
-            background: transparent;
-            cursor: pointer;
-        }
-    </style>
 </head>
 
 <body>
 
-    <header>
-        <h1>To Do List</h1>
+    <header >
+        <h1 class="glow-text">To Do List</h1>
         <div class="input">
             <input type="text" id="input" placeholder="Enter task">
             <input type="submit" name="" id="submit">
@@ -116,69 +20,26 @@
 
     <ul id="taskList">
     </ul>
-    <script>
-
-        
-let input = document.getElementById('input');
-        let submit = document.getElementById('submit');
-        let taskList = document.getElementById('taskList');
-
-        // Add task when pressing Enter key
-        input.addEventListener('keyup', (e) => {
-            if (e.keyCode === 13) {
-                submit.click();
-            }
-        });
-
-        // Add task when clicking the submit button
-        submit.addEventListener('click', () => {
-            let task = input.value.trim();
-
-            // Check if the input value is not empty
-            if (task === '') {
-                alert("Please enter a task");
-                return;
-            }
-
-            let li = document.createElement('li');
-
-            let checkBox = document.createElement('input');
-            checkBox.type = 'checkbox';
-
-            checkBox.addEventListener('click', () => {
-                if (checkBox.checked) {
-                    li.style.textDecoration = 'line-through';
-                    li.style.opacity = '0.5';
-                } else {
-                    li.style.textDecoration = 'none';
-                    li.style.opacity = '1';
-                }
-            });
-
-            let btn = document.createElement('button');
-            btn.textContent = 'X';
-            btn.style.marginLeft = '10px';
-
-            btn.addEventListener('click', () => {
-                taskList.removeChild(li);
-            });
-
-
-            li.appendChild(checkBox);
-            li.appendChild(document.createTextNode(task));
-            li.appendChild(btn);
-
-            taskList.appendChild(li);
-
-            // Clear the input field after adding the task
-            input.value = '';
-        });
 
 
 
+    <div id="rankModal"
+        style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%);
+  background:#1f1f1f; color:white; padding:20px; border-radius:12px; z-index:1000; box-shadow: 0 0 20px rgba(0,0,0,0.7);">
+        <h3>Select Task Rank</h3>
+        <p id="taskPreview"></p>
+        <div style="margin-top:10px;">
+            <button class="rankBtn" data-rank="E">E-Rank</button>
+            <button class="rankBtn" data-rank="D">D-Rank</button>
+            <button class="rankBtn" data-rank="C">C-Rank</button>
+            <button class="rankBtn" data-rank="B">B-Rank</button>
+            <button class="rankBtn" data-rank="A">A-Rank</button>
+            <button class="rankBtn" data-rank="S">S-Rank</button>
+        </div>
+    </div>
 
 
-    </script>
+    <script src="./3.0.js"></script>
 </body>
 
 </html>
